@@ -15,7 +15,7 @@ spec:
         app: node-hello-world
     spec:
       containers:
-      - image: nodehello:1.2
+      - image: nodehello:1.3
         name: hello-world
         imagePullPolicy: Never
         resources: {}
