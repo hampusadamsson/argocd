@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: node-hello-world
+  name: hello-world-argocd
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: node-hello-world
+  template:
+    metadata:
+      labels:
+        app: node-hello-world
+    spec:
+      containers:
+      - image: nodehello:1.2
+        name: hello-world
+        imagePullPolicy: Never
+        resources: {}
+        ports:
+        - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-service
+  labels:
+    app: node-hello-world
+spec:
+  selector:
+    app: node-hello-world
+  ports:
+    - port: 3000
+  type: LoadBalancer
